@@ -4,15 +4,11 @@ import { ChangePasswordView } from "./ui/ChangePasswordView";
 import { ChangePasswordController } from "@abb/controller";
 
 export class ChangePasswordConnector extends React.PureComponent<
-  RouteComponentProps<{ key: string }>,
-  {}
+  RouteComponentProps<{ key: string }>
 > {
-  submit = async (values: any) => {
-    console.log(values);
-
-    return null;
+  onFinish = () => {
+    this.props.history.push("/login");
   };
-
   render() {
     const {
       match: {
@@ -24,8 +20,9 @@ export class ChangePasswordConnector extends React.PureComponent<
       <ChangePasswordController>
         {({ submit }) => (
           <ChangePasswordView
-            // tslint:disable-next-line:jsx-no-lambda
-            submit={async ({ newPassword }) => submit({ key, newPassword })}
+            onFinish={this.onFinish}
+            key={key}
+            submit={submit}
           />
         )}
       </ChangePasswordController>
